@@ -1,13 +1,13 @@
-import React from 'react'
-import './App.css'
-import { useState } from 'react'
-import HomePage from './HomePage';
-import backgroundImage from '../public/images/Background.png';
-
+import React from "react";
+import "./App.css";
+import { useState } from "react";
+import UserHomePage from "./UserHomePage";
+import backgroundImage from "../public/images/Background.png";
+import Navbar from "./Navbar";
 
 // - Display a sign up form for volunteers.
-// - Render drop down options in the sign up form for date, time and items. 
-// - Nice extension options for this page: Make the date drop down options dynamic and change automatically based on the current date, remove items from the options on the list of items to donate as they are signed up for. Add options to cancel/change the sign up form after submitted. 
+// - Render drop down options in the sign up form for date, time and items.
+// - Nice extension options for this page: Make the date drop down options dynamic and change automatically based on the current date, remove items from the options on the list of items to donate as they are signed up for. Add options to cancel/change the sign up form after submitted.
 
 export default function VolunteerView(props) {
   const [signUpData, setSignUpData] = useState({
@@ -20,11 +20,11 @@ export default function VolunteerView(props) {
   });
 
   const [availableItems, setAvailableItems] = useState([
-    '30 tuna sandwiches',
-    '30 cheese sandwiches',
-    '30 boiled eggs',
-    '30 muffins',
-    '30 pieces of soft fruit',
+    "30 tuna sandwiches",
+    "30 cheese sandwiches",
+    "30 boiled eggs",
+    "30 muffins",
+    "30 pieces of soft fruit",
   ]);
 
   const handleInputChange = (event) => {
@@ -42,9 +42,9 @@ export default function VolunteerView(props) {
     let options = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(signUpData)
+      body: JSON.stringify(signUpData),
     };
     try {
       // this will run POST on /todos b/c of input from options?
@@ -70,9 +70,15 @@ export default function VolunteerView(props) {
   }
 
   return (
-    <div className="background" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div
+      className="background"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
       <div className="sign-up">
-        <h2>Thanks for choosing to sign up! Please enter your details below:</h2>
+        <Navbar />
+        <h2>
+          Thanks for choosing to sign up! Please enter your details below:
+        </h2>
         <form onSubmit={handleSubmit}>
           <label>
             First name
