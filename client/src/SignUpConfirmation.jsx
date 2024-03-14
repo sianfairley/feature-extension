@@ -1,10 +1,21 @@
-import React from 'react'
-import './App.css'
+import React from "react";
+import "./App.css";
+import Login from "./Login";
+import backgroundImage from "../public/images/Background.png";
 
 export default function SignUpConfirmation() {
   return (
-    <div>SignUpConfirmation</div>
-  )
+    <div
+      className="background sign-up-confirmation"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
+      <p>
+        Thank you for signing up - now you can login and register for your first
+        project!
+      </p>
+      <Login />
+    </div>
+  );
 }
 
-// component not used yet - would be nice to add this as a pop up/new page confirmation for the volunteer when submitting the sign up form.
+// On confirmation, button to send user to login

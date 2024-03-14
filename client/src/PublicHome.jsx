@@ -3,13 +3,14 @@ import "./App.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import backgroundImage from "../public/images/Background.png";
+import Login from "./Login";
 
 // - Display the entrance page and organization information.
 // - Render images and basic info.
 // - Include buttons to navigate to VolunteerView and StaffView.
 // - Display contact information.
 
-export default function UserHomePage() {
+export default function PublicHome() {
   const [someState, setSomeState] = useState(0);
 
   return (
@@ -20,12 +21,13 @@ export default function UserHomePage() {
       >
         <h1>The Giving Project</h1>
         <div className="homepage-buttons">
-          <Link to="/VolunteerView">
+          <Link to="/SignUp">
             <button>Join us and sign up</button>
           </Link>
-          <Link to="/StaffView">
+          <Login />
+          {/* <Link to="/StaffView">
             <button>List of volunteers signed up</button>
-          </Link>
+          </Link> */}
         </div>
         <div className="homepage">
           <div className="homepage-text">

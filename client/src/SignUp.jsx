@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
 import { useState } from "react";
-import UserHomePage from "./UserHomePage";
+import { useNavigate } from "react-router-dom";
+
 import backgroundImage from "../public/images/Background.png";
 import Navbar from "./Navbar";
 
@@ -9,23 +10,16 @@ import Navbar from "./Navbar";
 // - Render drop down options in the sign up form for date, time and items.
 // - Nice extension options for this page: Make the date drop down options dynamic and change automatically based on the current date, remove items from the options on the list of items to donate as they are signed up for. Add options to cancel/change the sign up form after submitted.
 
-export default function VolunteerView(props) {
+export default function SignUp(props) {
+  const navigate = useNavigate();
+
   const [signUpData, setSignUpData] = useState({
     first_name: "",
     last_name: "",
+    email: "",
     phone_number: "",
-    sign_up_date: "",
-    shift_time: "",
-    items_to_donate: "",
+    password: "",
   });
-
-  const [availableItems, setAvailableItems] = useState([
-    "30 tuna sandwiches",
-    "30 cheese sandwiches",
-    "30 boiled eggs",
-    "30 muffins",
-    "30 pieces of soft fruit",
-  ]);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -48,10 +42,12 @@ export default function VolunteerView(props) {
     };
     try {
       // this will run POST on /todos b/c of input from options?
-      let response = await fetch("/api", options);
+      let response = await fetch("/api/signup", options);
       if (response.ok) {
         // data = response.data from POST api function? i.e. full updated list
         let data = await response.json();
+        console.log(data);
+        navigate("/SignUpConfirmation");
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -59,14 +55,13 @@ export default function VolunteerView(props) {
       console.log(`Network error: ${err.message}`);
     }
 
-    setSignUpData({
-      first_name: "",
-      last_name: "",
-      phone_number: "",
-      sign_up_date: "",
-      shift_time: "",
-      items_to_donate: "",
-    });
+    // setSignUpData({
+    //   first_name: "",
+    //   last_name: "",
+    //   email: "",
+    //   phone_number: "",
+    //   password: "",
+    // });
   }
 
   return (
@@ -97,6 +92,14 @@ export default function VolunteerView(props) {
             />
           </label>
           <label>
+            Email
+            <input
+              name="email"
+              value={signUpData.email}
+              onChange={(e) => handleInputChange(e)}
+            />
+          </label>
+          <label>
             Phone number
             <input
               name="phone_number"
@@ -105,44 +108,15 @@ export default function VolunteerView(props) {
             />
           </label>
           <label>
-            Sign up date
-            <select
-              name="sign_up_date"
-              value={signUpData.sign_up_date}
+            Password
+            <input
+              type="password"
+              name="password"
+              value={signUpData.password}
               onChange={(e) => handleInputChange(e)}
-            >
-              <option value="2024-03-09">Saturday, March 9th</option>
-              <option value="2024-03-10">Sunday, March 10th</option>
-              <option value="2024-03-16">Saturday, March 16th</option>
-              <option value="2024-03-17">Sunday, March 17th</option>
-            </select>
+            />
           </label>
 
-          <label>
-            Shift time
-            <select
-              name="shift_time"
-              value={signUpData.shift_time}
-              onChange={(e) => handleInputChange(e)}
-            >
-              <option value="13:00:00">Afternoon (1-3pm)</option>
-              <option value="19:00:00">Evening (7-9pm)</option>
-            </select>
-          </label>
-          <label>
-            Items to donate
-            <select
-              name="items_to_donate"
-              value={signUpData.items_to_donate}
-              onChange={(e) => handleInputChange(e)}
-            >
-              {availableItems.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-          </label>
           <button type="submit">Submit</button>
         </form>
       </div>
