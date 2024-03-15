@@ -9,6 +9,7 @@ import Error404 from "./Error.jsx";
 import { Routes, Route } from "react-router-dom";
 import UserView from "./UserView.jsx";
 import ShowUsers from "./ShowUsers.jsx";
+import AdminLogin from "./AdminLogin.jsx";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         <Route path="/StaffView" element={<StaffView />}>
           <Route path="ShowUsers" element={<ShowUsers />} />
         </Route>
-
+        <Route path="/AdminLogin" element={<AdminLogin />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </>

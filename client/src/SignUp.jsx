@@ -70,8 +70,8 @@ export default function SignUp(props) {
       className="background"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
+      <Navbar />
       <div className="sign-up">
-        <Navbar />
         <div className="sign-up-form">
           <h2>
             Thanks for choosing to sign up! Please enter your details below:

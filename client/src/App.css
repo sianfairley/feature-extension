@@ -60,7 +60,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  color: white;
+  color: black;
   font-family: "Courier New", Courier, monospace;
   box-sizing: border-box;
   font-size: 25px;
@@ -72,6 +72,12 @@
   display: block;
   width: 100%;
   margin-bottom: 15px;
+}
+
+.sign-up-form {
+  background-color: bisque;
+  opacity: 0.8;
+  padding: 20px;
 }
 
 .sign-up-confirmation {
