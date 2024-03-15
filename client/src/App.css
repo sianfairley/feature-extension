@@ -76,7 +76,7 @@
 
 .sign-up-form {
   background-color: bisque;
-  opacity: 0.8;
+  opacity: 0.9;
   padding: 20px;
 }
 
@@ -90,9 +90,12 @@
 
 .login {
   background-color: bisque;
+  display: flex;
+  justify-self: end;
   max-width: 50%;
   padding: 20px;
   margin-top: 10px;
+  opacity: 0.9;
 }
 
 .login input {

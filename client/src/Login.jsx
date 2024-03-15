@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UserView from "./UserView";
 
 export default function Login() {
   const navigate = useNavigate();

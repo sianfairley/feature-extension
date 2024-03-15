@@ -10,3 +10,13 @@ CREATE TABLE `table_volunteers`(
     `isAdmin` BOOLEAN,
     UNIQUE (email, phone_number)
 );
+
+CREATE TABLE `events`(
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+`date` DATE NOT NULL,
+`shift_1` BOOLEAN NOT NULL,
+`shift_2` BOOLEAN NOT NULL,
+`is_active` BOOLEAN NOT NULL,
+`admin_comment` VARCHAR(500)
+);
+

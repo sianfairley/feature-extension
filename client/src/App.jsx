@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import PublicHomePage from "./PublicHome.jsx";
 import SignUp from "./SignUp.jsx";
@@ -10,26 +9,30 @@ import { Routes, Route } from "react-router-dom";
 import UserView from "./UserView.jsx";
 import ShowUsers from "./ShowUsers.jsx";
 import AdminLogin from "./AdminLogin.jsx";
+import EditUsers from "./EditUsers.jsx";
 
 function App() {
   return (
     <>
-      <Routes>
-        {/* all routes will go inside routes tags here */}
-        <Route path="/" element={<PublicHomePage />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/SignUpConfirmation" element={<SignUpConfirmation />} />
-        {/* Private route to user views */}
-        <Route path="/UserView" element={<UserView />} />
-        {/* <PrivateRoute></PrivateRoute> */}
-        {/* Private route to staff views */}
+      <div>
+        <Routes>
+          {/* all routes will go inside routes tags here */}
+          <Route path="/" element={<PublicHomePage />} />
+          <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/SignUpConfirmation" element={<SignUpConfirmation />} />
+          {/* Private route to user views */}
+          <Route path="/UserView" element={<UserView />} />
+          {/* <PrivateRoute></PrivateRoute> */}
+          {/* Private route to staff views */}
 
-        <Route path="/StaffView" element={<StaffView />}>
-          <Route path="ShowUsers" element={<ShowUsers />} />
-        </Route>
-        <Route path="/AdminLogin" element={<AdminLogin />} />
-        <Route path="*" element={<Error404 />} />
-      </Routes>
+          <Route path="/StaffView" element={<StaffView />}>
+            <Route path="ShowUsers" element={<ShowUsers />} />
+            <Route path="EditUsers" element={<EditUsers />} />
+          </Route>
+          <Route path="/AdminLogin" element={<AdminLogin />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </div>
     </>
   );
 }

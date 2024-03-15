@@ -14,14 +14,20 @@ const supersecret = process.env.SUPER_SECRET;
 /* GET home page. */
 router.get("/", async (req, res) => {
   try {
-    let result = await db(
-      "SELECT * FROM table_volunteers WHERE isAdmin = true"
-    );
+    let result = await db("SELECT * FROM table_volunteers");
     res.status(200).send(result.data); // send data to client.
   } catch (error) {
     res.status(500).send({ error: error.message });
   }
 });
+
+function allUsers(req, res) {
+  db("SELECT * FROM table_volunteers ORDER BY id DESC;")
+    .then((results) => {
+      res.send(results.data);
+    })
+    .catch((err) => res.status(500).send(err));
+}
 
 /* ----- ADMIN LOGIN ------*/
 
@@ -52,6 +58,20 @@ router.post("/login", async (req, res) => {
     }
   } catch (err) {
     res.status(400).send(err);
+  }
+});
+
+/* ------ TOGGLE USER ROLE ------*/
+router.put("/setRole/:id", async (req, res) => {
+  let userId = req.params.id;
+
+  try {
+    await db(
+      `UPDATE table_volunteers SET isAdmin = NOT isAdmin WHERE id="${userId}";`
+    );
+    allUsers(req, res);
+  } catch (err) {
+    res.status(500).send(err);
   }
 });
 
