@@ -14,6 +14,8 @@ export default function ShowUsers() {
     ShowVolunteers();
   }, []);
 
+  const deleteUser = () => {};
+
   async function ShowVolunteers() {
     try {
       let response = await fetch("/api");
@@ -52,7 +54,7 @@ export default function ShowUsers() {
                 <td>{vol.phone_number}</td>
                 <td>{vol.email}</td>
                 <button>Edit user</button>
-                <button>Delete user</button>
+                <button onClick={deleteUser}>Delete user</button>
               </tr>
             ))}
           </tbody>

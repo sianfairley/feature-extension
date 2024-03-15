@@ -29,15 +29,19 @@ export default function Login() {
         },
         body: JSON.stringify(LoginData),
       };
-      let response = await fetch("api/login", options);
 
-      //If results ok, redirect to userhome
-      if (response.ok) {
+      let results = await fetch("api/users/login", options);
+      let data = await results.json();
+
+      //If results ok, save the token from the server in local storage
+      if (results.ok) {
+        console.log(data);
+        localStorage.setItem("token", data.token);
+
+        // navigate("/UserView");
         navigate("/UserView");
-        console.log("ok");
       } else {
-        let errorMessage = await response.text();
-        console.log("login failed:", errorMessage);
+        console.log(data.error);
       }
     } catch (err) {
       console.log(err);

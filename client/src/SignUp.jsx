@@ -19,6 +19,7 @@ export default function SignUp(props) {
     email: "",
     phone_number: "",
     password: "",
+    isAdmin: false,
   });
 
   const handleInputChange = (event) => {
@@ -42,7 +43,7 @@ export default function SignUp(props) {
     };
     try {
       // this will run POST on /todos b/c of input from options?
-      let response = await fetch("/api/signup", options);
+      let response = await fetch("/api/users/signup", options);
       if (response.ok) {
         // data = response.data from POST api function? i.e. full updated list
         let data = await response.json();
@@ -71,54 +72,56 @@ export default function SignUp(props) {
     >
       <div className="sign-up">
         <Navbar />
-        <h2>
-          Thanks for choosing to sign up! Please enter your details below:
-        </h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            First name
-            <input
-              name="first_name"
-              value={signUpData.first_name}
-              onChange={(e) => handleInputChange(e)}
-            />
-          </label>
-          <label>
-            Last name
-            <input
-              name="last_name"
-              value={signUpData.last_name}
-              onChange={(e) => handleInputChange(e)}
-            />
-          </label>
-          <label>
-            Email
-            <input
-              name="email"
-              value={signUpData.email}
-              onChange={(e) => handleInputChange(e)}
-            />
-          </label>
-          <label>
-            Phone number
-            <input
-              name="phone_number"
-              value={signUpData.phone_number}
-              onChange={(e) => handleInputChange(e)}
-            />
-          </label>
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              value={signUpData.password}
-              onChange={(e) => handleInputChange(e)}
-            />
-          </label>
+        <div className="sign-up-form">
+          <h2>
+            Thanks for choosing to sign up! Please enter your details below:
+          </h2>
+          <form onSubmit={handleSubmit}>
+            <label>
+              First name
+              <input
+                name="first_name"
+                value={signUpData.first_name}
+                onChange={(e) => handleInputChange(e)}
+              />
+            </label>
+            <label>
+              Last name
+              <input
+                name="last_name"
+                value={signUpData.last_name}
+                onChange={(e) => handleInputChange(e)}
+              />
+            </label>
+            <label>
+              Email
+              <input
+                name="email"
+                value={signUpData.email}
+                onChange={(e) => handleInputChange(e)}
+              />
+            </label>
+            <label>
+              Phone number
+              <input
+                name="phone_number"
+                value={signUpData.phone_number}
+                onChange={(e) => handleInputChange(e)}
+              />
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                name="password"
+                value={signUpData.password}
+                onChange={(e) => handleInputChange(e)}
+              />
+            </label>
 
-          <button type="submit">Submit</button>
-        </form>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     </div>
   );

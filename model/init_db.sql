@@ -7,5 +7,6 @@ CREATE TABLE `table_volunteers`(
     `email` VARCHAR(50) NOT NULL,
     `phone_number` VARCHAR(255) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
+    `isAdmin` BOOLEAN,
     UNIQUE (email, phone_number)
 );
