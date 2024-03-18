@@ -7,12 +7,16 @@ import StaffView from "./StaffView";
 import SignUpConfirmation from "./SignUpConfirmation";
 import Error404 from "./Error.jsx";
 
-import UserView from "./UserView.jsx";
-import ShowUsers from "./ShowUsers.jsx";
+// --- ADMIN COMPONENTS --- */
 import AdminLogin from "./AdminLogin.jsx";
-import EditUsers from "./EditUsers.jsx";
 import ManageEvents from "./ManageEvents.jsx";
+import EditUsers from "./EditUsers.jsx";
 import AdminViewEvents from "./AdminViewEvents.jsx";
+import ShowUsers from "./ShowUsers.jsx";
+
+// --- USER COMPONENTS --- */
+import UserView from "./UserView.jsx";
+import UserViewEvents from "./UserViewEvents.jsx";
 
 function App() {
   const [allEvents, setAllEvents] = useState([]);
@@ -49,10 +53,24 @@ function App() {
           <Route path="ManageEvents" element={<ManageEvents />} />
           <Route
             path="/AdminViewEvents"
-            element={<AdminViewEvents allEvents={allEvents} />}
+            element={
+              <AdminViewEvents
+                allEvents={allEvents}
+                setAllEvents={setAllEvents}
+              />
+            }
           />
 
           <Route path="/AdminLogin" element={<AdminLogin />} />
+          <Route
+            path="/UserViewEvents"
+            element={
+              <UserViewEvents
+                allEvents={allEvents}
+                setAllEvents={setAllEvents}
+              />
+            }
+          />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>

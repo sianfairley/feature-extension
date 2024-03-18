@@ -5,10 +5,11 @@ import backgroundImage from "/images/Background.png";
 export default function ManageEvents() {
   // const navigate = useNavigate();
 
+  // CREATE NEW EVENT
   const [activityData, setActivityData] = useState({
     date: "",
     shift: "",
-    volunteers: 0,
+    volunteers_registered: 0,
     is_active: 1,
     admin_comment: "",
   });

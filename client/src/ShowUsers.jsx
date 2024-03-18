@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import backgroundImage from "../public/images/Background.png";
+import backgroundImage from "/images/Background.png";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 

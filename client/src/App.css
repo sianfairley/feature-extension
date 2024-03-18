@@ -78,6 +78,7 @@
   background-color: bisque;
   opacity: 0.9;
   padding: 20px;
+  max-width: 100%;
 }
 
 .sign-up-confirmation {
@@ -94,7 +95,7 @@
   justify-self: end;
   max-width: 50%;
   padding: 20px;
-  margin-top: 10px;
+  margin-bottom: 10px;
   opacity: 0.9;
 }
 

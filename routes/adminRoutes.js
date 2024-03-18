@@ -88,14 +88,30 @@ router.put("/setRole/:id", async (req, res) => {
 
 /* --- ADD EVENT --- */
 router.post("/addevent", async (req, res) => {
-  let { date, shift, volunteers, is_active, admin_comment } = req.body;
+  let { date, shift, volunteers_registered, is_active, admin_comment } =
+    req.body;
   try {
     await db(
-      `INSERT INTO events (date, shift, volunteers, is_active, admin_comment) VALUES ('${date}', '${shift}', '${volunteers}', '${is_active}', '${admin_comment}')`
+      `INSERT INTO events (date, shift, volunteers_registered, is_active, admin_comment) VALUES ('${date}', '${shift}', '${volunteers_registered}', '${is_active}', '${admin_comment}')`
     );
     res.send({ message: "New event added" });
   } catch (err) {
     res.status(400).send(err);
+  }
+});
+
+/* --- TOGGLE COMPLETE EVENT ---*/
+
+router.put("/setcomplete/:id", async (req, res) => {
+  let eventId = req.params.id;
+
+  try {
+    await db(
+      `UPDATE events SET is_active = NOT is_active WHERE id="${eventId}";`
+    );
+    getAllEvents(req, res);
+  } catch (err) {
+    res.status(500).send(err);
   }
 });
 

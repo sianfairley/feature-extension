@@ -24,7 +24,9 @@ export default function StaffView() {
         <Link to={"Projects"}>
           <button>See Projects</button>
         </Link>
-        <Outlet />
+        <Link to={"AdminViewEvents"}>
+          <button>View events</button>
+        </Link>
       </div>
     </>
   );

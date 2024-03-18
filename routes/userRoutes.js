@@ -12,16 +12,16 @@ const saltRounds = 10;
 const supersecret = process.env.SUPER_SECRET;
 
 /* GET home page. */
-router.get("/", async (req, res) => {
-  try {
-    let result = await db("SELECT * FROM table_volunteers");
-    res.status(200).send(result.data); // send data to client.
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-});
+// router.get("/", async (req, res) => {
+//   try {
+//     let result = await db("SELECT * FROM table_volunteers");
+//     res.status(200).send(result.data); // send data to client.
+//   } catch (error) {
+//     res.status(500).send({ error: error.message });
+//   }
+// });
 
-/********* SIGNUP  *********/
+/********* NEW USER SIGNUP  *********/
 
 router.post("/signup", async (req, res) => {
   // The request's body is available in req.body. done with object destructuring.
@@ -74,4 +74,27 @@ router.post("/login", async (req, res) => {
   }
 });
 
+/* --- GET ALL ACTIVE EVENTS ---*/
+router.get("/activeevents", async (req, res) => {
+  try {
+    let result = await db("SELECT * FROM events WHERE is_active = 1");
+    res.status(200).send(result.data);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
+
+/* --- SIGNUP FOR EVENT --- */
+router.post("/eventsignup/:eventID", async (req, res) => {
+  let { eventID } = req.params;
+  let volunteerID = 1;
+  try {
+    await db(`INSERT INTO event_volunteers (volunteerID, eventID)
+    VALUES ('${volunteerID}','${eventID}')`);
+    //respond with ok
+    res.send({ message: "Volunteer registered for event" });
+  } catch (error) {
+    res.status(500).send({ error: "Could not register for event" });
+  }
+});
 module.exports = router;
