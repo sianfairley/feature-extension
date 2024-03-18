@@ -1,20 +1,27 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import backgroundImage from "/images/Background.png";
 
 export default function ManageEvents() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [activityData, setActivityData] = useState({
-    date:
+    date: "",
+    shift: "",
+    volunteers: 0,
+    is_active: 1,
+    admin_comment: "",
   });
 
   const handleInputChange = (event) => {
+    console.log(event.target.value);
     const value = event.target.value;
     const name = event.target.name;
     setActivityData((prev) => ({
       ...prev,
       [name]: value,
     }));
+    console.log(activityData);
   };
 
   async function handleSubmit(event) {
@@ -28,13 +35,10 @@ export default function ManageEvents() {
       body: JSON.stringify(activityData),
     };
     try {
-      // this will run POST on /todos b/c of input from options?
-      let response = await fetch("/api/admin/createevent", options);
+      let response = await fetch("/api/admin/addevent", options);
       if (response.ok) {
-        // data = response.data from POST api function? i.e. full updated list
         let data = await response.json();
         console.log(data);
-        // navigate("/ViewEvents");
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -48,7 +52,6 @@ export default function ManageEvents() {
       className="background"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <Navbar />
       <div className="sign-up">
         <div className="sign-up-form">
           <h2>Add a new event</h2>
@@ -62,11 +65,36 @@ export default function ManageEvents() {
                 onChange={(e) => handleInputChange(e)}
               />
             </label>
+
+            <legend>
+              Shift
+              <div>
+                <label htmlFor="shift1">1-3</label>
+
+                <input
+                  type="radio"
+                  name="shift"
+                  value="1-3"
+                  checked={activityData.shift === "1-3"}
+                  onChange={(e) => handleInputChange(e)}
+                />
+              </div>
+              <label htmlFor="shift2">later</label>
+              <input
+                type="radio"
+                name="shift"
+                value="later"
+                checked={activityData.shift === "later"}
+                onChange={(e) => handleInputChange(e)}
+              />
+            </legend>
+
             <label>
               Add any additional information for volunteers
               <input
-                name="last_name"
-                value={activityData.comments}
+                type="text"
+                name="admin_comment"
+                value={activityData.admin_comment}
                 onChange={(e) => handleInputChange(e)}
               />
             </label>

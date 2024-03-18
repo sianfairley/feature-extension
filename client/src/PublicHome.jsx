@@ -24,11 +24,13 @@ export default function PublicHome() {
           <Link to="/SignUp">
             <button>Join us and sign up</button>
           </Link>
-          <Login />
-          {/* <Link to="/StaffView">
-            <button>List of volunteers signed up</button>
-          </Link> */}
+
+          <button>
+            <Link to={"/AdminLogin"}>Admin login</Link>
+          </button>
         </div>
+        <Login />
+
         <div className="homepage">
           <div className="homepage-text">
             <h2>About our mission:</h2>

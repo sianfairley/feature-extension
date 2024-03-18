@@ -29,6 +29,17 @@ function allUsers(req, res) {
     .catch((err) => res.status(500).send(err));
 }
 
+function getAllEvents(req, res) {
+  db("SELECT * FROM events ORDER BY id DESC")
+    .then((results) => {
+      res.send(results.data);
+    })
+    .catch((err) => res.status(500).send(err));
+}
+
+/* --- GET ALL EVENTS --- */
+router.get("/allevents", getAllEvents);
+
 /* ----- ADMIN LOGIN ------*/
 
 router.post("/login", async (req, res) => {
@@ -72,6 +83,19 @@ router.put("/setRole/:id", async (req, res) => {
     allUsers(req, res);
   } catch (err) {
     res.status(500).send(err);
+  }
+});
+
+/* --- ADD EVENT --- */
+router.post("/addevent", async (req, res) => {
+  let { date, shift, volunteers, is_active, admin_comment } = req.body;
+  try {
+    await db(
+      `INSERT INTO events (date, shift, volunteers, is_active, admin_comment) VALUES ('${date}', '${shift}', '${volunteers}', '${is_active}', '${admin_comment}')`
+    );
+    res.send({ message: "New event added" });
+  } catch (err) {
+    res.status(400).send(err);
   }
 });
 

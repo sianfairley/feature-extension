@@ -55,14 +55,6 @@ export default function SignUp(props) {
     } catch (err) {
       console.log(`Network error: ${err.message}`);
     }
-
-    // setSignUpData({
-    //   first_name: "",
-    //   last_name: "",
-    //   email: "",
-    //   phone_number: "",
-    //   password: "",
-    // });
   }
 
   return (

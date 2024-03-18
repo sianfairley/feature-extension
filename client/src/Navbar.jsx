@@ -6,11 +6,10 @@ export default function Navbar() {
     <div>
       <button>
         <Link to={"/"} className="navbar-link">
-          {" "}
           Home
         </Link>
       </button>
-
+     
       <LogOut />
     </div>
   );
