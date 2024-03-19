@@ -34,7 +34,7 @@ export default function ShowUsers() {
 
   async function ShowVolunteers() {
     try {
-      let response = await fetch("/api/users");
+      let response = await fetch("/api/admin");
       if (response.ok) {
         let data = await response.json();
         setVolunteerList(data);
@@ -48,12 +48,12 @@ export default function ShowUsers() {
 
   return (
     <div
-      className="background"
+      className="background "
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="users-table">
         <table>
-          <caption>List of Volunteers</caption>
+          <caption>Volunteer Information</caption>
           <thead>
             <tr>
               <th scope="col">First name</th>

@@ -5,11 +5,11 @@ export default function UserView() {
   return (
     <div>
       <Navbar />
-      <div>User view</div>
       <button>My details</button>
-      <button>
-        <Link to={"UserViewEvents"}>View events</Link>
-      </button>
+
+      <Link to="/UserViewEvents">
+        <button>View events </button>
+      </Link>
     </div>
   );
 }

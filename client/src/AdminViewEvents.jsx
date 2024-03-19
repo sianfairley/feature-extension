@@ -1,4 +1,9 @@
+import { useState } from "react";
+
 export default function AdminViewEvents({ allEvents, setAllEvents }) {
+  const [registeredVolunteers, setRegisteredVolunteers] = useState([]);
+
+  // --- TOGGLE EVENT ----
   const toggleComplete = (id) => {
     let options = {
       method: "PUT",
@@ -16,9 +21,24 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
       .catch((error) => console.log(error));
   };
 
+  // Get user info for each event
+  // async function ShowRegisteredVolunteers() {
+  //   try {
+  //     let response = await fetch("/api/admin/registeredvolunteers");
+  //     if (response.ok) {
+  //       let data = await response.json();
+  //       setRegisteredVolunteers(data);
+  //     } else {
+  //       console.log(`Server error: ${response.status} ${response.statusText}`);
+  //     }
+  //   } catch (err) {
+  //     console.log(`Network error: ${err.message}`);
+  //   }
+  // }
+
   return (
     <div className="background">
-      <div className="users-table">
+      <div className="admin-users-table">
         <table>
           <caption>Events</caption>
           <thead>

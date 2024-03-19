@@ -31,8 +31,8 @@ router.post("/signup", async (req, res) => {
     const encryptedPass = await bcrypt.hash(password, saltRounds);
 
     await db(
-      `INSERT INTO table_volunteers (first_name, last_name, email, phone_number, password)
-    VALUES ('${first_name}', '${last_name}', '${email}', '${phone_number}', '${encryptedPass}')`
+      `INSERT INTO table_volunteers (first_name, last_name, email, phone_number, password, isAdmin)
+    VALUES ('${first_name}', '${last_name}', '${email}', '${phone_number}', '${encryptedPass}', false)`
     );
     //3. respond with ok
     res.send({ message: "New user registered" });
@@ -91,10 +91,15 @@ router.post("/eventsignup/:eventID", async (req, res) => {
   try {
     await db(`INSERT INTO event_volunteers (volunteerID, eventID)
     VALUES ('${volunteerID}','${eventID}')`);
+
+    //Update value of volunteers_registered in events table
+    await db(
+      `UPDATE events SET volunteers_registered = volunteers_registered + 1 WHERE id = ${eventID}`
+    );
     //respond with ok
-    res.send({ message: "Volunteer registered for event" });
+    res.send({ message: "Sucess: Volunteer signed up for event" });
   } catch (error) {
-    res.status(500).send({ error: "Could not register for event" });
+    res.status(500).send({ error: "Could not signup for event" });
   }
 });
 module.exports = router;

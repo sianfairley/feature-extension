@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import backgroundImage from "../public/images/Background.png";
+import backgroundImage from "/images/Background.png";
 import Login from "./Login";
 
 // - Display the entrance page and organization information.
@@ -10,7 +10,7 @@ import Login from "./Login";
 // - Include buttons to navigate to VolunteerView and StaffView.
 // - Display contact information.
 
-export default function PublicHome() {
+export default function Home() {
   const [someState, setSomeState] = useState(0);
 
   return (
@@ -24,10 +24,9 @@ export default function PublicHome() {
           <Link to="/SignUp">
             <button>Join us and sign up</button>
           </Link>
-
-          <button>
-            <Link to={"/AdminLogin"}>Admin login</Link>
-          </button>
+          <Link to="/AdminLogin">
+            <button>Admin</button>
+          </Link>
         </div>
         <Login />
 

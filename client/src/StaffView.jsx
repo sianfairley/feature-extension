@@ -17,14 +17,15 @@ export default function StaffView() {
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
         <Navbar />
-        <Link to={"ShowUsers"}>
-          <button>View volunteers</button>
+
+        <Link to="/ShowUsers">
+          <button>Show Volunteers</button>
         </Link>
-        <ShowUsers />
-        <Link to={"Projects"}>
-          <button>See Projects</button>
+        <Link to="/ManageEvents">
+          <button>Add event</button>
         </Link>
-        <Link to={"AdminViewEvents"}>
+
+        <Link to={"/AdminViewEvents"}>
           <button>View events</button>
         </Link>
       </div>

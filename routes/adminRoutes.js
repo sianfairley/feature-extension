@@ -91,10 +91,11 @@ router.post("/addevent", async (req, res) => {
   let { date, shift, volunteers_registered, is_active, admin_comment } =
     req.body;
   try {
-    await db(
+    let results = await db(
       `INSERT INTO events (date, shift, volunteers_registered, is_active, admin_comment) VALUES ('${date}', '${shift}', '${volunteers_registered}', '${is_active}', '${admin_comment}')`
     );
     res.send({ message: "New event added" });
+    console.log(results);
   } catch (err) {
     res.status(400).send(err);
   }
@@ -114,5 +115,7 @@ router.put("/setcomplete/:id", async (req, res) => {
     res.status(500).send(err);
   }
 });
+
+/* --- GET USERS REGEISTERED FOR EVENTS --- */
 
 module.exports = router;

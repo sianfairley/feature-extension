@@ -7,6 +7,10 @@ export default function UserViewEvents() {
 
   // Get all active events
   useEffect(() => {
+    showActiveEvents();
+  }, []);
+
+  const showActiveEvents = () => {
     fetch("/api/users/activeevents")
       .then((res) => res.json())
       .then((data) => {
@@ -16,7 +20,7 @@ export default function UserViewEvents() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
 
   // Sign up to event - get logged in user's id
   async function signupEvent(id) {
@@ -30,6 +34,8 @@ export default function UserViewEvents() {
       let response = await fetch(`/api/users/eventsignup/${id}`, options);
       if (response.ok) {
         let data = await response.json();
+        setAttendingEvent(true);
+        showActiveEvents();
         console.log(data);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
@@ -61,10 +67,16 @@ export default function UserViewEvents() {
                 <td>{thisEvent.date}</td>
                 <td>{thisEvent.shift}</td>
                 <td>{thisEvent.volunteers_registered.toString()}</td>
-                <td>
-                  <button onClick={() => signupEvent(thisEvent.id)}>
-                    Sign me up!
-                  </button>
+                <td
+                  style={attendingEvent ? { backgroundColor: "green" } : null}
+                >
+                  {attendingEvent ? (
+                    <button onClick={() => signupEvent(thisEvent.id)}>
+                      Sign me up!
+                    </button>
+                  ) : (
+                    <p>Attending</p>
+                  )}
                 </td>
                 <td>{thisEvent.admin_comment}</td>
               </tr>

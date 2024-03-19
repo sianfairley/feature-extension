@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import PublicHomePage from "./PublicHome.jsx";
+import Home from "./Home.jsx";
 import SignUp from "./SignUp.jsx";
 import StaffView from "./StaffView";
 import SignUpConfirmation from "./SignUpConfirmation";
@@ -38,7 +38,7 @@ function App() {
       <div>
         <Routes>
           {/* all routes will go inside routes tags here */}
-          <Route path="/" element={<PublicHomePage />} />
+          <Route path="/" element={<Home />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/SignUpConfirmation" element={<SignUpConfirmation />} />
           {/* Private route to user views */}
@@ -46,10 +46,9 @@ function App() {
           {/* <PrivateRoute></PrivateRoute> */}
           {/* Private route to staff views */}
 
-          <Route path="/StaffView" element={<StaffView />}>
-            <Route path="ShowUsers" element={<ShowUsers />} />
-            <Route path="EditUsers" element={<EditUsers />} />
-          </Route>
+          <Route path="/StaffView" element={<StaffView />} />
+          <Route path="ShowUsers" element={<ShowUsers />} />
+          <Route path="EditUsers" element={<EditUsers />} />
           <Route path="ManageEvents" element={<ManageEvents />} />
           <Route
             path="/AdminViewEvents"

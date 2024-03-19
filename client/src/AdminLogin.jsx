@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import backgroundImage from "/images/Background.png";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -48,28 +49,33 @@ function AdminLogin() {
   };
 
   return (
-    <div className="login">
-      <h3>Admin Login</h3>
-      <form onSubmit={handleLogin}>
-        <label>
-          Email
-          <input
-            name="email"
-            value={LoginData.email}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            value={LoginData.password}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </label>
-        <button type="submit">Login</button>
-      </form>
+    <div
+      className="background"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
+      <div className="admin-login">
+        <h3>Admin Login</h3>
+        <form onSubmit={handleLogin}>
+          <label>
+            Email
+            <input
+              name="email"
+              value={LoginData.email}
+              onChange={(e) => handleInputChange(e)}
+            />
+          </label>
+          <label>
+            Password
+            <input
+              type="password"
+              name="password"
+              value={LoginData.password}
+              onChange={(e) => handleInputChange(e)}
+            />
+          </label>
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </div>
   );
 }

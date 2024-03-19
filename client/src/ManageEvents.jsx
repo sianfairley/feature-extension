@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import backgroundImage from "/images/Background.png";
 
 export default function ManageEvents() {
   // const navigate = useNavigate();
-
+  const [eventAdded, setEventAdded] = useState(false);
   // CREATE NEW EVENT
   const [activityData, setActivityData] = useState({
     date: "",
@@ -15,7 +15,6 @@ export default function ManageEvents() {
   });
 
   const handleInputChange = (event) => {
-    console.log(event.target.value);
     const value = event.target.value;
     const name = event.target.name;
     setActivityData((prev) => ({
@@ -40,6 +39,7 @@ export default function ManageEvents() {
       if (response.ok) {
         let data = await response.json();
         console.log(data);
+        setEventAdded(true);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -53,8 +53,8 @@ export default function ManageEvents() {
       className="background"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="sign-up">
-        <div className="sign-up-form">
+      <div className="create-event">
+        <div className="create-event-form">
           <h2>Add a new event</h2>
           <form onSubmit={handleSubmit}>
             <label>
@@ -70,7 +70,7 @@ export default function ManageEvents() {
             <legend>
               Shift
               <div>
-                <label htmlFor="shift1">1-3</label>
+                <label htmlFor="shift1">1-3 pm</label>
 
                 <input
                   type="radio"
@@ -80,7 +80,7 @@ export default function ManageEvents() {
                   onChange={(e) => handleInputChange(e)}
                 />
               </div>
-              <label htmlFor="shift2">later</label>
+              <label htmlFor="shift2">7-9 pm</label>
               <input
                 type="radio"
                 name="shift"
@@ -102,6 +102,12 @@ export default function ManageEvents() {
 
             <button type="submit">Submit</button>
           </form>
+          <div>
+            {eventAdded ? "Event added" : null}
+            <Link to="/AdminViewEvents">
+              <button>View events</button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

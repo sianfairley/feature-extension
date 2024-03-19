@@ -53,7 +53,7 @@
 }
 
 .sign-up {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 50px;
   background-image: url("..public/images/Background.png");
@@ -144,7 +144,63 @@ caption {
 
 .users-table {
   background-color: bisque;
+  opacity: 0.9;
+
+  max-width: 80%;
+  margin: 20px;
+  padding: 20px;
+}
+
+/* ADMIN */
+
+.admin-login {
+  background-color: #197ba1;
+  display: flex;
+  justify-self: end;
   max-width: 50%;
+  padding: 20px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+.admin-login input {
+  margin: 10px;
+}
+
+.create-event {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 50px;
+  background-image: url("..public/images/Background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  color: black;
+  font-family: "Courier New", Courier, monospace;
+  box-sizing: border-box;
+  font-size: 25px;
+}
+
+.create-event input,
+.create-event select,
+.create-event button {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.create-event-form {
+  background-color: #197ba1;
+  opacity: 0.9;
+  padding: 20px;
+  max-width: 100%;
+}
+
+.admin-users-table {
+  background-color: #197aa1;
+  opacity: 0.9;
+
+  max-width: 80%;
   margin: 20px;
   padding: 20px;
 }
