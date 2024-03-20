@@ -29,4 +29,6 @@ VALUES
 
 INSERT INTO `events`(date, shift, volunteers_registered, is_active, admin_comment) VALUES('2024-04-01', '1-3'
 , 0, 1, 'First event!'),('2024-04-01', '7-9'
-, 0, 1, 'Second event!')
+, 0, 1, 'Second event!');
+
+INSERT INTO `event_volunteers`(volunteerID, eventID) VALUES (1, 1)

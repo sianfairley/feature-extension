@@ -21,7 +21,6 @@ export default function ManageEvents() {
       ...prev,
       [name]: value,
     }));
-    console.log(activityData);
   };
 
   async function handleSubmit(event) {
@@ -103,10 +102,14 @@ export default function ManageEvents() {
             <button type="submit">Submit</button>
           </form>
           <div>
-            {eventAdded ? "Event added" : null}
-            <Link to="/AdminViewEvents">
-              <button>View events</button>
-            </Link>
+            {eventAdded ? (
+              <div>
+                <p>Event added</p>
+                <Link to="/AdminViewEvents">
+                  <button>View events</button>
+                </Link>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

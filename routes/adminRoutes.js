@@ -95,6 +95,7 @@ router.post("/addevent", async (req, res) => {
       `INSERT INTO events (date, shift, volunteers_registered, is_active, admin_comment) VALUES ('${date}', '${shift}', '${volunteers_registered}', '${is_active}', '${admin_comment}')`
     );
     res.send({ message: "New event added" });
+
     console.log(results);
   } catch (err) {
     res.status(400).send(err);
@@ -117,11 +118,11 @@ router.put("/setcomplete/:id", async (req, res) => {
 });
 
 /* --- GET USERS REGEISTERED FOR EVENTS --- */
-router.get("/eventvolunteers/:thisevent", async (req, res) => {
-  let { thisevent } = req.params;
+router.get("/eventvolunteers/:eventID", async (req, res) => {
+  let { eventID } = req.params;
   try {
     let results = await db(
-      `SELECT table_volunteers.*, events.* FROM table_volunteers INNER JOIN event_volunteers ON table_volunteers.id = event_volunteers.volunteerID INNER JOIN events ON event_volunteers.eventID = events.id WHERE event_volunteers.eventID = "${thisevent}"`
+      `SELECT table_volunteers.*, events.* FROM table_volunteers INNER JOIN event_volunteers ON table_volunteers.id = event_volunteers.volunteerID INNER JOIN events ON event_volunteers.eventID = events.id WHERE event_volunteers.eventID = "${eventID}"`
     );
     res.send(results);
     console.log(results);

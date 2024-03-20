@@ -18,8 +18,16 @@ export default function UserViewEvents() {
     fetch("/api/users/activeevents")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setAllActiveEvents(data);
+        const newData = data.map((item) => {
+          const jsDate = new Date(item.date);
+          const stringDate = jsDate.toDateString();
+          return {
+            ...item,
+            date: stringDate,
+          };
+        });
+        console.log(data.date);
+        setAllActiveEvents(newData);
       })
       .catch((error) => {
         console.log(error);
