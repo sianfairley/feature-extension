@@ -5,11 +5,6 @@ import { Link } from "react-router-dom";
 import backgroundImage from "/images/Background.png";
 import Login from "./Login";
 
-// - Display the entrance page and organization information.
-// - Render images and basic info.
-// - Include buttons to navigate to VolunteerView and StaffView.
-// - Display contact information.
-
 export default function Home() {
   const [someState, setSomeState] = useState(0);
 

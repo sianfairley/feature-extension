@@ -45,6 +45,14 @@
   text-decoration: none;
 }
 
+.welcome-message {
+  background: bisque;
+  opacity: 0.9;
+  max-width: 20%;
+  font-weight: bold;
+  padding: 1em;
+}
+
 .footer {
   background-color: rgba(255, 166, 0, 0.192);
   opacity: 0.6;

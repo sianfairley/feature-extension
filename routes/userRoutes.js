@@ -74,6 +74,22 @@ router.post("/login", async (req, res) => {
   }
 });
 
+/*--- GET USER DATA ---*/
+router.get("/userdata", async (req, res) => {
+  let authHeader = req.headers["authorization"];
+  let [str, token] = authHeader.split(" ");
+
+  try {
+    let payload = jwt.verify(token, supersecret);
+    let result = await db(
+      `SELECT * FROM table_volunteers WHERE id = ${payload.userID}`
+    );
+    res.send(result.data[0]);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 /* --- GET ALL ACTIVE EVENTS ---*/
 router.get("/activeevents", async (req, res) => {
   try {
@@ -85,12 +101,11 @@ router.get("/activeevents", async (req, res) => {
 });
 
 /* --- SIGNUP FOR EVENT --- */
-router.post("/eventsignup/:eventID", async (req, res) => {
-  let { eventID } = req.params;
-  let volunteerID = 1;
+router.post("/eventsignup", async (req, res) => {
+  let { eventID, userID } = req.body;
   try {
     await db(`INSERT INTO event_volunteers (volunteerID, eventID)
-    VALUES ('${volunteerID}','${eventID}')`);
+    VALUES ('${userID}','${eventID}')`);
 
     //Update value of volunteers_registered in events table
     await db(

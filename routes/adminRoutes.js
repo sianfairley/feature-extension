@@ -117,5 +117,18 @@ router.put("/setcomplete/:id", async (req, res) => {
 });
 
 /* --- GET USERS REGEISTERED FOR EVENTS --- */
+router.get("/eventvolunteers/:thisevent", async (req, res) => {
+  let { thisevent } = req.params;
+  try {
+    let results = await db(
+      `SELECT table_volunteers.*, events.* FROM table_volunteers INNER JOIN event_volunteers ON table_volunteers.id = event_volunteers.volunteerID INNER JOIN events ON event_volunteers.eventID = events.id WHERE event_volunteers.eventID = "${thisevent}"`
+    );
+    res.send(results);
+    console.log(results);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
 
 module.exports = router;

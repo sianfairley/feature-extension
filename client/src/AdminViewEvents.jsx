@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AdminViewEvents({ allEvents, setAllEvents }) {
-  const [registeredVolunteers, setRegisteredVolunteers] = useState([]);
+  const [eventVolunteers, setEventVolunteers] = useState([]);
+
+  // Call showEventVolunteers
+  useEffect(() => {
+    ShowEventVolunteers();
+  }, []);
 
   // --- TOGGLE EVENT ----
   const toggleComplete = (id) => {
@@ -22,19 +27,19 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
   };
 
   // Get user info for each event
-  // async function ShowRegisteredVolunteers() {
-  //   try {
-  //     let response = await fetch("/api/admin/registeredvolunteers");
-  //     if (response.ok) {
-  //       let data = await response.json();
-  //       setRegisteredVolunteers(data);
-  //     } else {
-  //       console.log(`Server error: ${response.status} ${response.statusText}`);
-  //     }
-  //   } catch (err) {
-  //     console.log(`Network error: ${err.message}`);
-  //   }
-  // }
+  async function ShowEventVolunteers() {
+    try {
+      let response = await fetch("/api/admin/eventvolunteers");
+      if (response.ok) {
+        let data = await response.json();
+        setEventVolunteers(data);
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Network error: ${err.message}`);
+    }
+  }
 
   return (
     <div className="background">
@@ -45,7 +50,8 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
             <tr>
               <th scope="col">Date</th>
               <th scope="col">Shift</th>
-              <th scope="col">Volunteers registered</th>
+              <th scope="col">No. Volunteers registered</th>
+              <th scope="col">Volunteers</th>
               <th scope="col">Status</th>
               <th scope="col">Admin comments</th>
             </tr>
@@ -56,6 +62,7 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
                 <td>{thisEvent.date}</td>
                 <td>{thisEvent.shift}</td>
                 <td>{thisEvent.volunteers_registered}</td>
+                <td>Volunteer first/last name + email</td>
                 <td>
                   {thisEvent.is_active ? "Active" : "Finished"}
                   <button onClick={() => toggleComplete(thisEvent.id)}>

@@ -39,7 +39,7 @@ function AdminLogin() {
         localStorage.setItem("token", data.token);
 
         // navigate("/UserView");
-        navigate("/StaffView");
+        navigate("/AdminView");
       } else {
         console.log(data.error);
       }
