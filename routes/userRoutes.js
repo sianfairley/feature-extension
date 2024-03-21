@@ -100,6 +100,21 @@ router.get("/activeevents", async (req, res) => {
   }
 });
 
+/* --- GET EVENTS USER SIGNUP UP FOR -- */
+router.get("/usersevents/:userID", async (req, res) => {
+  let { userID } = req.params;
+  try {
+    let results = await db(
+      `SELECT events.* FROM events INNER JOIN event_volunteers ON events.id = event_volunteers.eventID WHERE event_volunteers.volunteerID = ${userID}`
+    );
+    res.send(results);
+    console.log(results);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
 /* --- SIGNUP FOR EVENT --- */
 router.post("/eventsignup", async (req, res) => {
   let { eventID, userID } = req.body;
@@ -108,11 +123,12 @@ router.post("/eventsignup", async (req, res) => {
     VALUES ('${userID}','${eventID}')`);
 
     //Update value of volunteers_registered in events table
+
     await db(
       `UPDATE events SET volunteers_registered = volunteers_registered + 1 WHERE id = ${eventID}`
     );
     //respond with ok
-    res.send({ message: "Sucess: Volunteer signed up for event" });
+    res.send({ message: "Success: Volunteer signed up for event" });
   } catch (error) {
     res.status(500).send({ error: "Could not signup for event" });
   }

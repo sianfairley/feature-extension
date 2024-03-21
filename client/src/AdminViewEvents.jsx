@@ -24,7 +24,7 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
       });
   }, []);
 
-  // --- TOGGLE EVENT ----
+  // --- TOGGLE EVENT COMPLETION----
   const toggleComplete = (id) => {
     let options = {
       method: "PUT",
@@ -103,15 +103,19 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
         </table>
       </div>
       <div className="view-event-volunteers">
-        {showThisEventVolunteers && (
+        {showThisEventVolunteers ? (
           <div>
             <div>
               {eventVolunteers.map((volunteer) => (
                 <div key={volunteer.id}>
-                  <p>
-                    {volunteer.first_name} {volunteer.last_name}
-                  </p>
-                  <p>{volunteer.email}</p>
+                  <ul>
+                    <li>
+                      <p>
+                        {volunteer.first_name} {volunteer.last_name}
+                      </p>
+                      <p>{volunteer.email}</p>
+                    </li>
+                  </ul>
                 </div>
               ))}
             </div>
@@ -119,7 +123,7 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
               Close
             </button>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

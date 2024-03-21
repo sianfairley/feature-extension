@@ -1,9 +1,8 @@
 import Navbar from "./Navbar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Outlet } from "react-router-dom";
 import UserViewEvents from "./UserViewEvents";
 import backgroundImage from "/images/Background.png";
 import { useState, useEffect } from "react";
-import UserContactDetails from "./UserDetails";
 
 export default function UserView() {
   const [userData, setUserData] = useState([]);
@@ -42,8 +41,7 @@ export default function UserView() {
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <Navbar />
-
-      <Link to="/UserViewEvents">
+      <Link to="/UserView/UserViewEvents">
         <button>View events </button>
       </Link>
 
@@ -54,6 +52,7 @@ export default function UserView() {
           <li>{userData.email}</li>
         </ul>
       </div>
+      <Outlet />
     </div>
   );
 }

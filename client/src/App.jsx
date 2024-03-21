@@ -1,6 +1,8 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+// --- MAIN PAGES ---
 import Home from "./Home.jsx";
 import SignUp from "./SignUp.jsx";
 import SignUpConfirmation from "./SignUpConfirmation";
@@ -26,8 +28,16 @@ function App() {
     fetch("/api/admin/allevents")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setAllEvents(data);
+        const newData = data.map((item) => {
+          const jsDate = new Date(item.date);
+          const stringDate = jsDate.toDateString();
+          return {
+            ...item,
+            date: stringDate,
+          };
+        });
+        console.log(data.date);
+        setAllEvents(newData);
       })
       .catch((error) => {
         console.log(error);
@@ -38,41 +48,39 @@ function App() {
     <>
       <div>
         <Routes>
-          {/* all routes will go inside routes tags here */}
           <Route path="/" element={<Home />} />
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/SignUpConfirmation" element={<SignUpConfirmation />} />
-          {/* Private route to user views */}
+          {/* User components */}
+          <Route path="/UserView" element={<UserView />}>
+            <Route
+              path="UserViewEvents"
+              element={
+                <UserViewEvents
+                  allEvents={allEvents}
+                  setAllEvents={setAllEvents}
+                />
+              }
+            />
+            <Route path="UserDetails" element={<UserContactDetails />} />
+          </Route>
 
-          <Route path="/UserView" element={<UserView />} />
-          <Route
-            path="/UserViewEvents"
-            element={
-              <UserViewEvents
-                allEvents={allEvents}
-                setAllEvents={setAllEvents}
-              />
-            }
-          />
-          <Route path="/UserDetails" element={<UserContactDetails />} />
-
-          {/* <PrivateRoute></PrivateRoute> */}
-          {/* Private route to staff views */}
           <Route path="/AdminLogin" element={<AdminLogin />} />
-          <Route path="/AdminView" element={<AdminView />} />
-          <Route path="ShowUsers" element={<ShowUsers />} />
-          <Route path="EditUsers" element={<EditUsers />} />
-          <Route path="ManageEvents" element={<ManageEvents />} />
-          <Route
-            path="/AdminViewEvents"
-            element={
-              <AdminViewEvents
-                allEvents={allEvents}
-                setAllEvents={setAllEvents}
-              />
-            }
-          />
-
+          {/* Admin components */}
+          <Route path="/AdminView" element={<AdminView />}>
+            <Route path="ShowUsers" element={<ShowUsers />} />
+            <Route path="EditUsers" element={<EditUsers />} />
+            <Route path="ManageEvents" element={<ManageEvents />} />
+            <Route
+              path="AdminViewEvents"
+              element={
+                <AdminViewEvents
+                  allEvents={allEvents}
+                  setAllEvents={setAllEvents}
+                />
+              }
+            />
+          </Route>
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>

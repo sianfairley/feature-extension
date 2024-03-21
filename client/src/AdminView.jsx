@@ -16,21 +16,26 @@ export default function AdminView() {
         className="background"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
-        <Navbar />
-
-        <Link to="/ShowUsers">
-          <button>Show Volunteers</button>
-        </Link>
-        <Link to="/ManageEvents">
-          <button>Add event</button>
-        </Link>
-
-        <Link to={"/AdminViewEvents"}>
-          <button>View events</button>
-        </Link>
-        <div className="welcome-message">
-          <p>Welcome</p>
+        <div className="header">
+          <Navbar />
+          <div className="admin-welcome-message">
+            <p>Welcome</p>
+          </div>
         </div>
+        <div className="admin-tabs">
+          <Link to="/AdminView/ShowUsers">
+            <button>Show Volunteers</button>
+          </Link>
+          <Link to="/AdminView/ManageEvents">
+            <button>Add event</button>
+          </Link>
+
+          <Link to={"/AdminView/AdminViewEvents"}>
+            <button>View events</button>
+          </Link>
+        </div>
+
+        <Outlet />
       </div>
     </>
   );

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function UserViewEvents() {
   const [allActiveEvents, setAllActiveEvents] = useState([]);
-  const [attendingEvent, setAttendingEvent] = useState(false);
   const [userID, setUserID] = useState("");
+  const [usersEvents, setUsersEvents] = useState([]);
 
   const navigate = useNavigate();
 
@@ -18,6 +18,7 @@ export default function UserViewEvents() {
     fetch("/api/users/activeevents")
       .then((res) => res.json())
       .then((data) => {
+        //Change mysql date to string via JS date
         const newData = data.map((item) => {
           const jsDate = new Date(item.date);
           const stringDate = jsDate.toDateString();
@@ -37,8 +38,13 @@ export default function UserViewEvents() {
   // Get user's id to pass to signup function
   useEffect(() => {
     showActiveEvents();
-
     requestUserData();
+    const storedUserEvents = JSON.parse(localStorage.getItem("userEvents"));
+    if (storedUserEvents) {
+      setUsersEvents(storedUserEvents);
+    } else {
+      getUsersEvents(userID);
+    }
   }, []);
 
   //GET USER DATA
@@ -63,7 +69,24 @@ export default function UserViewEvents() {
     }
   };
 
-  // Sign up to event - get logged in user's id
+  //Get user's info from the event_volunteers table. Check whether they are signed up to any.
+  async function getUsersEvents(userID) {
+    try {
+      let response = await fetch(`/api/users/usersevents/${userID}`);
+      if (response.ok) {
+        let result = await response.json();
+        setUsersEvents(result.data);
+        localStorage.setItem("usersEvents", JSON.stringify(result.data));
+        console.log("User events:", result.data);
+      } else {
+        console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+    } catch (err) {
+      console.log(`Network error: ${err.message}`);
+    }
+  }
+
+  // Sign up to event using selected event's id and user id
   const signupEvent = async (eventID) => {
     let options = {
       method: "POST",
@@ -76,10 +99,10 @@ export default function UserViewEvents() {
       }),
     };
     try {
-      let response = await fetch(`/api/users/eventsignup`, options);
+      let response = await fetch(`/api/users/eventsignup/`, options);
       if (response.ok) {
         let data = await response.json();
-        setAttendingEvent(true);
+        showActiveEvents();
         console.log(data);
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
@@ -94,7 +117,7 @@ export default function UserViewEvents() {
       className="background"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="users-table">
+      <div className="user-events-table">
         <table>
           <caption>Events</caption>
           <thead>
@@ -111,11 +134,9 @@ export default function UserViewEvents() {
                 <td>{thisEvent.date}</td>
                 <td>{thisEvent.shift}</td>
                 <td>{thisEvent.volunteers_registered.toString()}</td>
-                <td
-                  style={attendingEvent ? { backgroundColor: "green" } : null}
-                >
-                  {attendingEvent ? (
-                    <p>Attending</p>
+                <td>
+                  {usersEvents.find((event) => event.id === thisEvent.id) ? (
+                    <p>Attending event</p>
                   ) : (
                     <button onClick={() => signupEvent(thisEvent.id)}>
                       Sign me up!
