@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import backgroundImage from "../public/images/Background.png";
 import Navbar from "./Navbar";
@@ -62,7 +62,9 @@ export default function SignUp(props) {
       className="background"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <Navbar />
+      <Link to={"/"} className="navbar-link">
+        <button>Home</button>
+      </Link>
       <div className="sign-up">
         <div className="sign-up-form">
           <h2>

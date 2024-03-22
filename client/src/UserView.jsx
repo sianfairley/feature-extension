@@ -1,6 +1,5 @@
 import Navbar from "./Navbar";
 import { Link, useNavigate, Outlet } from "react-router-dom";
-import UserViewEvents from "./UserViewEvents";
 import backgroundImage from "/images/Background.png";
 import { useState, useEffect } from "react";
 
@@ -42,7 +41,10 @@ export default function UserView() {
     >
       <Navbar />
       <Link to="/UserView/UserViewEvents">
-        <button>View events </button>
+        <button>View upcoming events</button>
+      </Link>
+      <Link to="/UserView/UserRegisteredEvents">
+        <button>See my events</button>
       </Link>
 
       <div className="welcome-message">

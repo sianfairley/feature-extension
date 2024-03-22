@@ -14,7 +14,7 @@ export default function Home() {
         className="background"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
-        <h1>The Giving Project</h1>
+        <h1 className="page-title">The Giving Project</h1>
         <div className="homepage-buttons">
           <Link to="/SignUp">
             <button>Join us and sign up</button>

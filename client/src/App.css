@@ -4,6 +4,10 @@
   gap: 5px;
   row-gap: 20px;
 }
+.page-title {
+  font-size: 4em;
+  padding: 1rem;
+}
 
 .img-homepage img {
   width: 300px;
@@ -60,10 +64,13 @@
 }
 
 .footer {
-  background-color: rgba(255, 166, 0, 0.192);
-  opacity: 0.6;
+  background-color: #eba11a;
+  opacity: 0.8;
   font-family: "Courier New", Courier, monospace;
+  font-size: large;
+  font-weight: bold;
   padding: 3em;
+  max-width: 30%;
 }
 
 .sign-up {
@@ -106,7 +113,7 @@
 .login {
   background-color: bisque;
   display: flex;
-  justify-self: end;
+  justify-content: space-between;
   max-width: 50%;
   padding: 20px;
   margin-bottom: 10px;
@@ -115,8 +122,14 @@
 
 .login input {
   margin: 10px;
+  align-items: center;
+  justify-self: center;
+  width: 80%;
 }
 
+.login h3 {
+  margin: 20px;
+}
 .homepage-text {
   padding: 2em;
   background-color: bisque;
@@ -168,7 +181,7 @@ caption {
 .admin-login {
   background-color: #197ba1;
   display: flex;
-  justify-self: end;
+  justify-content: space-between;
   max-width: 50%;
   padding: 20px;
   margin-bottom: 10px;
@@ -177,8 +190,14 @@ caption {
 
 .admin-login input {
   margin: 10px;
+  align-items: center;
+  justify-self: center;
+  width: 80%;
 }
 
+.admin-login h3 {
+  margin: 20px;
+}
 .admin-tabs {
   display: flex;
 }

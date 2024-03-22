@@ -20,6 +20,7 @@ import ShowUsers from "./ShowUsers.jsx";
 import UserView from "./UserView.jsx";
 import UserViewEvents from "./UserViewEvents.jsx";
 import UserContactDetails from "./UserDetails.jsx";
+import UserRegisteredEvents from "./UserRegisteredEvents.jsx";
 
 function App() {
   const [allEvents, setAllEvents] = useState([]);
@@ -63,6 +64,10 @@ function App() {
               }
             />
             <Route path="UserDetails" element={<UserContactDetails />} />
+            <Route
+              path="UserRegisteredEvents"
+              element={<UserRegisteredEvents />}
+            />
           </Route>
 
           <Route path="/AdminLogin" element={<AdminLogin />} />

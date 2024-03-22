@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import backgroundImage from "/images/Background.png";
+import Home from "./Home";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -53,6 +54,9 @@ function AdminLogin() {
       className="background"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
+      <Link to={"/"} className="navbar-link">
+        <button>Home</button>
+      </Link>
       <div className="admin-login">
         <h3>Admin Login</h3>
         <form onSubmit={handleLogin}>

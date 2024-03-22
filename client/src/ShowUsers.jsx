@@ -51,7 +51,7 @@ export default function ShowUsers() {
       className="background "
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="users-table">
+      <div className="admin-users-table">
         <table>
           <caption>Volunteer Information</caption>
           <thead>

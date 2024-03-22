@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export default function AdminViewEvents({ allEvents, setAllEvents }) {
   const [eventVolunteers, setEventVolunteers] = useState([]);
   const [showThisEventVolunteers, setShowThisEventVolunteers] = useState(false);
+  const [eventDates, setEventDates] = useState([]);
 
   useEffect(() => {
     fetch("/api/admin/allevents")
@@ -18,6 +19,7 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
         });
         console.log(data.date);
         setAllEvents(newData);
+        setEventDates(newData.map((event) => event.date));
       })
       .catch((error) => {
         console.log(error);
@@ -42,6 +44,12 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
       .catch((error) => console.log(error));
   };
 
+  //Scroll to volunteers list
+  const scrolltoVolunteers = () => {
+    const volunteersSection = document.getElementById("view-event-volunteers");
+    volunteersSection.scrollIntoView({ behavior: "smooth" });
+  };
+
   // Get user info for selected event
   async function ShowEventVolunteers(eventID) {
     try {
@@ -51,6 +59,7 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
         setEventVolunteers(result.data);
         console.log("Volunteers:", result.data);
         setShowThisEventVolunteers(true);
+        scrolltoVolunteers();
       } else {
         console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -76,10 +85,10 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
             </tr>
           </thead>
           <tbody>
-            {allEvents.map((thisEvent) => (
+            {allEvents.map((thisEvent, index) => (
               <tr key={thisEvent.id}>
                 <td>{thisEvent.id}</td>
-                <td>{thisEvent.date}</td>
+                <td>{eventDates[index]}</td>
                 <td>{thisEvent.shift}</td>
                 <td>{thisEvent.volunteers_registered}</td>
 
@@ -102,9 +111,11 @@ export default function AdminViewEvents({ allEvents, setAllEvents }) {
           </tbody>
         </table>
       </div>
-      <div className="view-event-volunteers">
+      <div className="view-event-volunteers" id="view-event-volunteers">
         {showThisEventVolunteers ? (
           <div>
+            <h3>Volunteers</h3>
+
             <div>
               {eventVolunteers.map((volunteer) => (
                 <div key={volunteer.id}>
